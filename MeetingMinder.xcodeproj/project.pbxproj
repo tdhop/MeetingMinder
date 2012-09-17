@@ -7,93 +7,103 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		22B6CECE160763BA00E964DC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B6CECD160763BA00E964DC /* UIKit.framework */; };
-		22B6CED0160763BA00E964DC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B6CECF160763BA00E964DC /* Foundation.framework */; };
-		22B6CED2160763BA00E964DC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B6CED1160763BA00E964DC /* CoreGraphics.framework */; };
-		22B6CED8160763BA00E964DC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22B6CED6160763BA00E964DC /* InfoPlist.strings */; };
-		22B6CEDA160763BA00E964DC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B6CED9160763BA00E964DC /* main.m */; };
-		22B6CEDE160763BA00E964DC /* MtgMinderAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B6CEDD160763BA00E964DC /* MtgMinderAppDelegate.m */; };
-		22B6CEE1160763BA00E964DC /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22B6CEDF160763BA00E964DC /* MainStoryboard.storyboard */; };
-		22B6CEE4160763BA00E964DC /* MtgMinderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B6CEE3160763BA00E964DC /* MtgMinderViewController.m */; };
+		2235D26B160624C5001F33EC /* AgendaContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 2235D26A160624C5001F33EC /* AgendaContext.m */; };
+		22D04C1115F399DC00071B3B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D04C1015F399DC00071B3B /* UIKit.framework */; };
+		22D04C1315F399DC00071B3B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D04C1215F399DC00071B3B /* Foundation.framework */; };
+		22D04C1515F399DC00071B3B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D04C1415F399DC00071B3B /* CoreGraphics.framework */; };
+		22D04C1B15F399DC00071B3B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22D04C1915F399DC00071B3B /* InfoPlist.strings */; };
+		22D04C1D15F399DC00071B3B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D04C1C15F399DC00071B3B /* main.m */; };
+		22D04C2115F399DC00071B3B /* MtgMinderAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D04C2015F399DC00071B3B /* MtgMinderAppDelegate.m */; };
+		22D04C2415F399DC00071B3B /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22D04C2215F399DC00071B3B /* MainStoryboard.storyboard */; };
+		22D04C2715F399DC00071B3B /* MtgMinderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D04C2615F399DC00071B3B /* MtgMinderViewController.m */; };
+		22D1D6C115F50F7200F5F781 /* AgendaItemVCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D1D6C015F50F7200F5F781 /* AgendaItemVCViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		22B6CEC9160763BA00E964DC /* MeetingMinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeetingMinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		22B6CECD160763BA00E964DC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		22B6CECF160763BA00E964DC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		22B6CED1160763BA00E964DC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		22B6CED5160763BA00E964DC /* MeetingMinder-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MeetingMinder-Info.plist"; sourceTree = "<group>"; };
-		22B6CED7160763BA00E964DC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		22B6CED9160763BA00E964DC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		22B6CEDB160763BA00E964DC /* MeetingMinder-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MeetingMinder-Prefix.pch"; sourceTree = "<group>"; };
-		22B6CEDC160763BA00E964DC /* MtgMinderAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MtgMinderAppDelegate.h; sourceTree = "<group>"; };
-		22B6CEDD160763BA00E964DC /* MtgMinderAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MtgMinderAppDelegate.m; sourceTree = "<group>"; };
-		22B6CEE0160763BA00E964DC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		22B6CEE2160763BA00E964DC /* MtgMinderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MtgMinderViewController.h; sourceTree = "<group>"; };
-		22B6CEE3160763BA00E964DC /* MtgMinderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MtgMinderViewController.m; sourceTree = "<group>"; };
+		2235D269160624C5001F33EC /* AgendaContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgendaContext.h; sourceTree = "<group>"; };
+		2235D26A160624C5001F33EC /* AgendaContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgendaContext.m; sourceTree = "<group>"; };
+		22D04C0C15F399DC00071B3B /* MeetingMinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeetingMinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		22D04C1015F399DC00071B3B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		22D04C1215F399DC00071B3B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		22D04C1415F399DC00071B3B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		22D04C1815F399DC00071B3B /* MeetingMinder-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MeetingMinder-Info.plist"; sourceTree = "<group>"; };
+		22D04C1A15F399DC00071B3B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		22D04C1C15F399DC00071B3B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		22D04C1E15F399DC00071B3B /* MeetingMinder-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MeetingMinder-Prefix.pch"; sourceTree = "<group>"; };
+		22D04C1F15F399DC00071B3B /* MtgMinderAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MtgMinderAppDelegate.h; sourceTree = "<group>"; };
+		22D04C2015F399DC00071B3B /* MtgMinderAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MtgMinderAppDelegate.m; sourceTree = "<group>"; };
+		22D04C2315F399DC00071B3B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		22D04C2515F399DC00071B3B /* MtgMinderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MtgMinderViewController.h; sourceTree = "<group>"; };
+		22D04C2615F399DC00071B3B /* MtgMinderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MtgMinderViewController.m; sourceTree = "<group>"; };
+		22D1D6BF15F50F7200F5F781 /* AgendaItemVCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgendaItemVCViewController.h; sourceTree = "<group>"; };
+		22D1D6C015F50F7200F5F781 /* AgendaItemVCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgendaItemVCViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		22B6CEC6160763BA00E964DC /* Frameworks */ = {
+		22D04C0915F399DB00071B3B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22B6CECE160763BA00E964DC /* UIKit.framework in Frameworks */,
-				22B6CED0160763BA00E964DC /* Foundation.framework in Frameworks */,
-				22B6CED2160763BA00E964DC /* CoreGraphics.framework in Frameworks */,
+				22D04C1115F399DC00071B3B /* UIKit.framework in Frameworks */,
+				22D04C1315F399DC00071B3B /* Foundation.framework in Frameworks */,
+				22D04C1515F399DC00071B3B /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		22B6CEBE160763BA00E964DC = {
+		22D04C0115F399DB00071B3B = {
 			isa = PBXGroup;
 			children = (
-				22B6CED3160763BA00E964DC /* MeetingMinder */,
-				22B6CECC160763BA00E964DC /* Frameworks */,
-				22B6CECA160763BA00E964DC /* Products */,
+				22D04C1615F399DC00071B3B /* MeetingMinder */,
+				22D04C0F15F399DC00071B3B /* Frameworks */,
+				22D04C0D15F399DC00071B3B /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		22B6CECA160763BA00E964DC /* Products */ = {
+		22D04C0D15F399DC00071B3B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				22B6CEC9160763BA00E964DC /* MeetingMinder.app */,
+				22D04C0C15F399DC00071B3B /* MeetingMinder.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		22B6CECC160763BA00E964DC /* Frameworks */ = {
+		22D04C0F15F399DC00071B3B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				22B6CECD160763BA00E964DC /* UIKit.framework */,
-				22B6CECF160763BA00E964DC /* Foundation.framework */,
-				22B6CED1160763BA00E964DC /* CoreGraphics.framework */,
+				22D04C1015F399DC00071B3B /* UIKit.framework */,
+				22D04C1215F399DC00071B3B /* Foundation.framework */,
+				22D04C1415F399DC00071B3B /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		22B6CED3160763BA00E964DC /* MeetingMinder */ = {
+		22D04C1615F399DC00071B3B /* MeetingMinder */ = {
 			isa = PBXGroup;
 			children = (
-				22B6CEDC160763BA00E964DC /* MtgMinderAppDelegate.h */,
-				22B6CEDD160763BA00E964DC /* MtgMinderAppDelegate.m */,
-				22B6CEDF160763BA00E964DC /* MainStoryboard.storyboard */,
-				22B6CEE2160763BA00E964DC /* MtgMinderViewController.h */,
-				22B6CEE3160763BA00E964DC /* MtgMinderViewController.m */,
-				22B6CED4160763BA00E964DC /* Supporting Files */,
+				22D04C1F15F399DC00071B3B /* MtgMinderAppDelegate.h */,
+				22D04C2015F399DC00071B3B /* MtgMinderAppDelegate.m */,
+				22D04C2215F399DC00071B3B /* MainStoryboard.storyboard */,
+				22D04C2515F399DC00071B3B /* MtgMinderViewController.h */,
+				22D04C2615F399DC00071B3B /* MtgMinderViewController.m */,
+				2235D269160624C5001F33EC /* AgendaContext.h */,
+				2235D26A160624C5001F33EC /* AgendaContext.m */,
+				22D1D6BF15F50F7200F5F781 /* AgendaItemVCViewController.h */,
+				22D1D6C015F50F7200F5F781 /* AgendaItemVCViewController.m */,
+				22D04C1715F399DC00071B3B /* Supporting Files */,
 			);
 			path = MeetingMinder;
 			sourceTree = "<group>";
 		};
-		22B6CED4160763BA00E964DC /* Supporting Files */ = {
+		22D04C1715F399DC00071B3B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				22B6CED5160763BA00E964DC /* MeetingMinder-Info.plist */,
-				22B6CED6160763BA00E964DC /* InfoPlist.strings */,
-				22B6CED9160763BA00E964DC /* main.m */,
-				22B6CEDB160763BA00E964DC /* MeetingMinder-Prefix.pch */,
+				22D04C1815F399DC00071B3B /* MeetingMinder-Info.plist */,
+				22D04C1915F399DC00071B3B /* InfoPlist.strings */,
+				22D04C1C15F399DC00071B3B /* main.m */,
+				22D04C1E15F399DC00071B3B /* MeetingMinder-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -101,13 +111,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		22B6CEC8160763BA00E964DC /* MeetingMinder */ = {
+		22D04C0B15F399DB00071B3B /* MeetingMinder */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 22B6CEE7160763BA00E964DC /* Build configuration list for PBXNativeTarget "MeetingMinder" */;
+			buildConfigurationList = 22D04C2A15F399DC00071B3B /* Build configuration list for PBXNativeTarget "MeetingMinder" */;
 			buildPhases = (
-				22B6CEC5160763BA00E964DC /* Sources */,
-				22B6CEC6160763BA00E964DC /* Frameworks */,
-				22B6CEC7160763BA00E964DC /* Resources */,
+				22D04C0815F399DB00071B3B /* Sources */,
+				22D04C0915F399DB00071B3B /* Frameworks */,
+				22D04C0A15F399DB00071B3B /* Resources */,
 			);
 			buildRules = (
 			);
@@ -115,74 +125,76 @@
 			);
 			name = MeetingMinder;
 			productName = MeetingMinder;
-			productReference = 22B6CEC9160763BA00E964DC /* MeetingMinder.app */;
+			productReference = 22D04C0C15F399DC00071B3B /* MeetingMinder.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		22B6CEC0160763BA00E964DC /* Project object */ = {
+		22D04C0315F399DB00071B3B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = MtgMinder;
 				LastUpgradeCheck = 0440;
 				ORGANIZATIONNAME = "Tim Hopmann";
 			};
-			buildConfigurationList = 22B6CEC3160763BA00E964DC /* Build configuration list for PBXProject "MeetingMinder" */;
+			buildConfigurationList = 22D04C0615F399DB00071B3B /* Build configuration list for PBXProject "MeetingMinder" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = 22B6CEBE160763BA00E964DC;
-			productRefGroup = 22B6CECA160763BA00E964DC /* Products */;
+			mainGroup = 22D04C0115F399DB00071B3B;
+			productRefGroup = 22D04C0D15F399DC00071B3B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				22B6CEC8160763BA00E964DC /* MeetingMinder */,
+				22D04C0B15F399DB00071B3B /* MeetingMinder */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		22B6CEC7160763BA00E964DC /* Resources */ = {
+		22D04C0A15F399DB00071B3B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22B6CED8160763BA00E964DC /* InfoPlist.strings in Resources */,
-				22B6CEE1160763BA00E964DC /* MainStoryboard.storyboard in Resources */,
+				22D04C1B15F399DC00071B3B /* InfoPlist.strings in Resources */,
+				22D04C2415F399DC00071B3B /* MainStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		22B6CEC5160763BA00E964DC /* Sources */ = {
+		22D04C0815F399DB00071B3B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22B6CEDA160763BA00E964DC /* main.m in Sources */,
-				22B6CEDE160763BA00E964DC /* MtgMinderAppDelegate.m in Sources */,
-				22B6CEE4160763BA00E964DC /* MtgMinderViewController.m in Sources */,
+				22D04C1D15F399DC00071B3B /* main.m in Sources */,
+				22D04C2115F399DC00071B3B /* MtgMinderAppDelegate.m in Sources */,
+				22D04C2715F399DC00071B3B /* MtgMinderViewController.m in Sources */,
+				22D1D6C115F50F7200F5F781 /* AgendaItemVCViewController.m in Sources */,
+				2235D26B160624C5001F33EC /* AgendaContext.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		22B6CED6160763BA00E964DC /* InfoPlist.strings */ = {
+		22D04C1915F399DC00071B3B /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				22B6CED7160763BA00E964DC /* en */,
+				22D04C1A15F399DC00071B3B /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		22B6CEDF160763BA00E964DC /* MainStoryboard.storyboard */ = {
+		22D04C2215F399DC00071B3B /* MainStoryboard.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				22B6CEE0160763BA00E964DC /* en */,
+				22D04C2315F399DC00071B3B /* en */,
 			);
 			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";
@@ -190,7 +202,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		22B6CEE5160763BA00E964DC /* Debug */ = {
+		22D04C2815F399DC00071B3B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -217,7 +229,7 @@
 			};
 			name = Debug;
 		};
-		22B6CEE6160763BA00E964DC /* Release */ = {
+		22D04C2915F399DC00071B3B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -239,7 +251,7 @@
 			};
 			name = Release;
 		};
-		22B6CEE8160763BA00E964DC /* Debug */ = {
+		22D04C2B15F399DC00071B3B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -250,7 +262,7 @@
 			};
 			name = Debug;
 		};
-		22B6CEE9160763BA00E964DC /* Release */ = {
+		22D04C2C15F399DC00071B3B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -264,24 +276,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		22B6CEC3160763BA00E964DC /* Build configuration list for PBXProject "MeetingMinder" */ = {
+		22D04C0615F399DB00071B3B /* Build configuration list for PBXProject "MeetingMinder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				22B6CEE5160763BA00E964DC /* Debug */,
-				22B6CEE6160763BA00E964DC /* Release */,
+				22D04C2815F399DC00071B3B /* Debug */,
+				22D04C2915F399DC00071B3B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		22B6CEE7160763BA00E964DC /* Build configuration list for PBXNativeTarget "MeetingMinder" */ = {
+		22D04C2A15F399DC00071B3B /* Build configuration list for PBXNativeTarget "MeetingMinder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				22B6CEE8160763BA00E964DC /* Debug */,
-				22B6CEE9160763BA00E964DC /* Release */,
+				22D04C2B15F399DC00071B3B /* Debug */,
+				22D04C2C15F399DC00071B3B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 22B6CEC0160763BA00E964DC /* Project object */;
+	rootObject = 22D04C0315F399DB00071B3B /* Project object */;
 }
