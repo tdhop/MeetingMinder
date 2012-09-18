@@ -8,6 +8,8 @@
 
 #import "MtgMinderViewController.h"
 #import "AgendaItemVCViewController.h"
+#import "AgendaContext.h"
+#import "NSMutableDictionary+AgendaItem.h"
 #import <math.h>
 
 #pragma mark Agenda Dictionary Keys
@@ -22,14 +24,12 @@
 
 #pragma mark Declare Agenda Properties
 
+// NEW: property for agenda context
+@property (strong, nonatomic) AgendaContext *myAgendaContext;
+
 // Properties to store agenda
 @property (strong, nonatomic) NSURL *agendaStorageURL; // Where the Agenda array will be stored
-@property (strong, nonatomic) NSMutableArray *agenda; // Holder for array of agenda items
-@property (strong, nonatomic) NSMutableDictionary *inFocusAgendaItem; // pointer to current in-focus agenda item in the agenda array
-// Properties to store inFocus agenda information
-@property (strong, nonatomic) NSString *inFocusAgendaName; // temp (working) copy of agenda name
-@property NSTimeInterval inFocusAgendaTimeInSeconds; // temp (working) copy of agenda time
-@property NSIndexPath *inFocusIndexPath; // pointer to current in focus agenda item
+
 
 #pragma mark Declare Table Properties
 
@@ -40,17 +40,15 @@
 
 @implementation MtgMinderViewController
 
+// NEW: synthesize myAgendaContext
+@synthesize myAgendaContext = _myAgendaContext;
+
 // synthesize all properties
 @synthesize mainAgendaLabel = _mainAgendaLabel;
 @synthesize timeLabel=_timeLabel;
 @synthesize agendaTableView = _agendaTableView;
 @synthesize agendaStorageURL = _agendaStorageURL;
-@synthesize inFocusAgendaItem = _inFocusAgendaItem;
-@synthesize inFocusAgendaName = _inFocusAgendaName;
-@synthesize inFocusAgendaTimeInSeconds = _inFocusAgendaTimeInSeconds;
-@synthesize inFocusIndexPath = _inFocusIndexPath;
-@synthesize agenda = _agenda;
-@synthesize detailEditRow = _detailEditRow; // The row whose detail disclosure was tapped OR new item
+@synthesize detailEditRow = _detailEditRow; // The row whose detail disclosure was tapped
 
 
 
@@ -71,18 +69,12 @@
     self.agendaStorageURL = [tempURLs lastObject];
     self.agendaStorageURL = [self.agendaStorageURL URLByAppendingPathComponent:@"Agenda.dat"];
     
-    // Read in the stored agenda - or initialize an empty one if there is no stored agenda
-    if ([[NSFileManager defaultManager] fileExistsAtPath:[self.agendaStorageURL path]]) {
-        self.agenda = [NSMutableArray arrayWithContentsOfURL:self.agendaStorageURL];
-    } else {
-        NSLog(@"This is where I need to initialize an empty agenda array");
-        self.agenda = [NSMutableArray arrayWithCapacity:5]; // Chose capacity of 5 somewhat randomly
-        // FOLLOWING CODE SETS UP A DUMMY AGENDA ITEM, REMOVE THIS CODE WHEN IMPLEMENTING "ADD AGENDA ITEM" FUNCTIONALITY
-        NSMutableDictionary *dummyAgendaItem = [NSMutableDictionary dictionaryWithCapacity:2];
-        [dummyAgendaItem setValue:[NSNumber numberWithDouble:5] forKey:AGENDA_TIME];
-        [dummyAgendaItem setValue:@"Dummy Item" forKey:AGENDA_NAME];
-        [self.agenda addObject:dummyAgendaItem];
-    }
+    // Get an AgendaContext object and ask it to load the agenda
+    self.myAgendaContext = [[AgendaContext alloc] initWithURL:self.agendaStorageURL];
+    if (![self.myAgendaContext loadAgenda]) {
+        NSLog(@"myAgendaContext failed to load");
+    } else NSLog(@"myAgendaContext loaded successfully");
+    
 }
 
 - (void)viewDidUnload
@@ -93,19 +85,179 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+    return NO; // (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
 #pragma mark - Agenda Control
 
 // Set context to first agenda item then call startTimer
 - (IBAction)startMeeting:(id)sender {
-    // Put Start Meeting code here
+    // Start meeting will both start AND re-start the meeting
+    NSMutableDictionary *itemInfo; // agenda info for item I'm about to start
+    UITableViewCell *cell; // cell to highlight
+    
+    // Set label for button to "Restart Meeting"
+    UIButton *myButton = sender;
+    [myButton setTitle:@"Restart Meeting" forState:UIControlStateNormal];
+    
+    // Un-highlight any item that might have been playing at the time
+    if (self.myAgendaContext.inFocusIndexPath) {
+        cell = [self.agendaTableView cellForRowAtIndexPath: self.myAgendaContext.inFocusIndexPath];
+        cell.selected = NO;
+    }
+    
+    
+    
+    // Now make sure that myAgendaContext is on the first item -- and that there is actually something there
+    if (![self.myAgendaContext goToFirst]) {
+        NSLog(@"Attempting to start meeting with empty agenda");
+        [self startTimer:0];
+    } else {
+
+        
+        itemInfo = [self.myAgendaContext inFocusInfo];
+        
+        // Set up main label to show this agenda item
+        self.mainAgendaLabel.text = itemInfo.name;
+        
+        // If time has not yet been set, it will be 0 -- so just start the timer with the time from this item
+        [self startTimer:itemInfo.time];
+    }
+    
+    // Make sure Pause/Resume button is in the right state
+    UIBarButtonItem *pausePlayButton;
+    
+    pausePlayButton = [[self.navigationController.toolbar items] objectAtIndex:0];
+    
+    pausePlayButton.title = @"Pause";
+    
+    
+    // Highlight the current in-progress meeting item
+    if (self.myAgendaContext.inFocusIndexPath) {
+        cell = [self.agendaTableView cellForRowAtIndexPath: self.myAgendaContext.inFocusIndexPath];
+        cell.selected = YES;
+    }
 }
 
 // Respond to Next button press by starting timer on next agenda item
 - (IBAction)nextItem:(id)sender {
-    // Put nextItem code here
+    
+    NSMutableDictionary *itemInfo; // agenda info for item I'm about to start
+    UITableViewCell *cell;
+
+    // Un-highlight any item that might have been playing at the time
+    if (self.myAgendaContext.inFocusIndexPath) {
+        cell = [self.agendaTableView cellForRowAtIndexPath: self.myAgendaContext.inFocusIndexPath];
+        cell.selected = NO;
+    }
+    
+    if(![self.myAgendaContext goToNext]) {
+        NSLog(@"Got fail back from goToNext");
+        // Do nothing
+    } else {
+        itemInfo = [self.myAgendaContext inFocusInfo];
+        
+        // Set up main label to show this agenda item
+        self.mainAgendaLabel.text = itemInfo.name;
+        
+        // If time has not yet been set, it will be 0 -- so just start the timer with the time from this item
+        [self startTimer:itemInfo.time];
+
+    }
+    
+    // Highlight the current in-progress meeting item
+    if (self.myAgendaContext.inFocusIndexPath) {
+        cell = [self.agendaTableView cellForRowAtIndexPath: self.myAgendaContext.inFocusIndexPath];
+        cell.selected = YES;
+    }
+}
+
+// Respond to Previous button press
+- (IBAction)previousItem:(id)sender {
+    
+    NSMutableDictionary *itemInfo; // agenda info for item I'm about to start
+    UITableViewCell *cell;
+    
+    // Un-highlight any item that might have been playing at the time
+    if (self.myAgendaContext.inFocusIndexPath) {
+        cell = [self.agendaTableView cellForRowAtIndexPath: self.myAgendaContext.inFocusIndexPath];
+        cell.selected = NO;
+    }
+    
+    if(![self.myAgendaContext goToPrevious]) {
+        NSLog(@"Got fail back from goToPrevious");
+        // Do nothing
+    } else {
+        itemInfo = [self.myAgendaContext inFocusInfo];
+        
+        // Set up main label to show this agenda item
+        self.mainAgendaLabel.text = itemInfo.name;
+        
+        // If time has not yet been set, it will be 0 -- so just start the timer with the time from this item
+        [self startTimer:itemInfo.time];
+        
+    }
+
+    // Highlight the current in-progress meeting item
+    if (self.myAgendaContext.inFocusIndexPath) {
+        cell = [self.agendaTableView cellForRowAtIndexPath: self.myAgendaContext.inFocusIndexPath];
+        cell.selected = YES;
+    }
+}
+
+// Start item at index, used when table cell is tapped
+- (void) startItemAtIndex: (NSUInteger) index {
+    
+    NSMutableDictionary *itemInfo; // agenda info for item I'm about to start
+    UITableViewCell *cell;
+    
+    // Un-highlight any item that might have been playing at the time
+    if (self.myAgendaContext.inFocusIndexPath) {
+        cell = [self.agendaTableView cellForRowAtIndexPath: self.myAgendaContext.inFocusIndexPath];
+        cell.selected = NO;
+    }
+    
+    if(![self.myAgendaContext goToIndex:index]) {
+        NSLog(@"Got fail back from goToIndex");
+        // Do nothing
+    } else {
+        itemInfo = [self.myAgendaContext inFocusInfo];
+        
+        // Set up main label to show this agenda item
+        self.mainAgendaLabel.text = itemInfo.name;
+        
+        // If time has not yet been set, it will be 0 -- so just start the timer with the time from this item
+        [self startTimer:itemInfo.time];
+        
+    }
+    
+    // Highlight the current in-progress meeting item
+    if (self.myAgendaContext.inFocusIndexPath) {
+        cell = [self.agendaTableView cellForRowAtIndexPath: self.myAgendaContext.inFocusIndexPath];
+        cell.selected = YES;
+    }
+    
+}
+
+// Pause or play meeting - suspends timer in current context
+- (IBAction)pausePlayMeeting:(id)sender {
+    
+    NSMutableDictionary *inFocusItem;
+    
+    inFocusItem = [self.myAgendaContext inFocusInfo];
+    
+    if ([myTimer isValid]) {
+        // Timer is currently running, stop it and store the remaining time, change button to "Play" symbol
+        [myTimer invalidate];
+        inFocusItem.remaining = currentTime;
+        UIBarButtonItem *button = sender;
+        button.title = @"Resume";
+    } else {
+        // Timer is not currently running, start it with the inFocusItem remaining time, change button to "Pause" symbol
+        [self startTimer:inFocusItem.remaining];
+        UIBarButtonItem *button = sender;
+        button.title = @"Pause";
+    }
 }
 
 #pragma mark - Timer Display
@@ -121,29 +273,16 @@ NSDate *lastDate; // will use this to calculate time interval from timer
 
 
 // The following are used to control the countdown timer display
-- (IBAction)startTimer:(id)sender {
+- (void)startTimer:(NSUInteger) time {
   
-    // Make sure that timer is not already running.  If it is, clean up
-    // FOR NOW I AM ONLY GOING TO RESTART THE TIMER, NOT WORRYING ABOUT OTHER CLEAN-UP
+    // Make sure that timer is not already running.  If it is, clean up (is anything needed here?)
     [myTimer invalidate];
     
-    // Set up working copies of in-focus agenda information to point to 1st agenda item
-    self.inFocusIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    self.inFocusAgendaItem = [self.agenda objectAtIndex:self.inFocusIndexPath.row];
-    self.inFocusAgendaName = [self.inFocusAgendaItem objectForKey:AGENDA_NAME];
-    self.inFocusAgendaTimeInSeconds = [[self.inFocusAgendaItem objectForKey:AGENDA_TIME] doubleValue];
-    
-    // Set up main label to reflect current agenda item
-    self.mainAgendaLabel.text = self.inFocusAgendaName;
-    
-    currentTime = self.inFocusAgendaTimeInSeconds; // Initialize timer to start of agenda item
-    self.timeLabel.text = [self stringFromTimeInterval:currentTime];
+    currentTime = time; // Initialize timer to initial value from arg time
+    self.timeLabel.text = [self timeStringFromInterval:currentTime];
     myTimer = [NSTimer scheduledTimerWithTimeInterval: 1.0 target: self selector: @selector(updateTimer:) userInfo:nil repeats:YES];
     lastDate = [NSDate date];
 
-    // Set lagel for button to "Restart Meeting
-    UIButton *myButton = sender;
-    [myButton setTitle:@"Restart Meeting" forState:UIControlStateNormal];
     NSLog(@"Starting Timer, currentTime = %d", currentTime);
     
     
@@ -153,15 +292,17 @@ NSDate *lastDate; // will use this to calculate time interval from timer
     
     NSTimeInterval timerInterval;
     
+    if (currentTime == 0) {
+        [myTimer invalidate];
+    } else {
     timerInterval = [[NSDate date] timeIntervalSinceDate:lastDate];
     int decrement = roundf(timerInterval); // makes sure I always decrement by exactly one second
     currentTime -= decrement;
-    self.timeLabel.text = [self stringFromTimeInterval:currentTime];
+    self.timeLabel.text = [self timeStringFromInterval:currentTime];
     lastDate = [NSDate date];
-    if (currentTime == 0) {
-        [myTimer invalidate];
-    }
+
     NSLog(@"Updating Timer, currentTime = %d", currentTime);
+    }
 }
 
 #pragma mark - Update Agenda Items (delegate methods)
@@ -169,43 +310,25 @@ NSDate *lastDate; // will use this to calculate time interval from timer
 // Add an agenda item
 - (IBAction)addAgendaItem:(id)sender {
     
-    // First, add an empty agenda item to the agenda array
-    NSMutableDictionary *newAgendaItem = [NSMutableDictionary dictionaryWithCapacity:2];
-    [newAgendaItem setValue:[NSNumber numberWithDouble:0] forKey:AGENDA_TIME];
-    [newAgendaItem setValue:@"New Item" forKey:AGENDA_NAME];
-    [self.agenda addObject:newAgendaItem];
-    
-    // Now set in focus agenda to this item
-    self.inFocusIndexPath = [NSIndexPath indexPathForRow:[self.agenda count]-1 inSection:0];
-    self.inFocusAgendaItem = [self.agenda lastObject];
-    self.inFocusAgendaName = [newAgendaItem objectForKey:AGENDA_NAME];
-    self.inFocusAgendaTimeInSeconds = [[newAgendaItem objectForKey:AGENDA_TIME] doubleValue];
-    self.detailEditRow = [NSIndexPath indexPathForRow:[self.agenda count]-1 inSection:0];
-    
-    
-    // Now store the new agenda array
-    [self.agenda writeToURL:self.agendaStorageURL atomically:YES];
+    if(![self.myAgendaContext addItemAtEnd]) {
+        NSLog(@"Add agenda item failed");
+    }
     
     // Now reload the table so it will show with new item even if user does not enter any info for it
     [self.agendaTableView reloadData];
     
     // Now go to agenda detail
+    self.detailEditRow = self.myAgendaContext.inFocusIndexPath;
     [self performSegueWithIdentifier:@"AgendaItemDetail" sender:self];
 }
 
 // Remove the in focus agenda item from the agenda
 - (void) deleteItem: (id) sender {
-    [self.agenda removeObjectAtIndex:self.detailEditRow.row];
-    // Now the in focus agenda item information is out of date so fix that
-    // IS nil GOING TO BE A PROBLEM FOR THIS???
-    self.inFocusAgendaItem = nil;
-    self.inFocusAgendaName = nil;
-    self.inFocusAgendaTimeInSeconds = 0;
-    self.inFocusIndexPath = nil;
     
-    // Now save the new agenda
-    [self.agenda writeToURL:self.agendaStorageURL atomically:YES];
-
+    if (![self.myAgendaContext deleteItemAtIndex:self.detailEditRow.row]) {
+        NSLog(@"Delete item failed");
+    }
+    
     // Now reload the table with the item removed
     [self.agendaTableView reloadData];
 }
@@ -214,38 +337,19 @@ NSDate *lastDate; // will use this to calculate time interval from timer
 // The following are used to receive information back from AgendaItemVCViewController
 // Delegate method: Update selected agenda item time duration in seconds
 - (void) updateItemTime:(NSTimeInterval) timeInterval sender:(id)sender {
-    NSLog(@"This is where I will update the item time for selected cell");
-    NSMutableDictionary *agendaItem = [self.agenda objectAtIndex:self.detailEditRow.row];
     
-    NSNumber *interval = [NSNumber numberWithDouble:timeInterval];
-    [agendaItem setValue:interval forKey:AGENDA_TIME];
-    
-    // Now store the new agenda array
-    [self.agenda writeToURL:self.agendaStorageURL atomically:YES];
-    
-    // Now update the agenda time shown in the current table cell
-    UITableViewCell *cell = [self.agendaTableView cellForRowAtIndexPath:self.detailEditRow];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%f",timeInterval];
-    
+    [self.myAgendaContext setTime:timeInterval forIndex:self.detailEditRow.row];
+
     // Now reload the table with new value
     [self.agendaTableView reloadData];
     
-    // NOTE: WILL ALSO NEED TO STORE WHEN USER CHANGES AGENDA ORDER
 }
 
 // Delegate method: Update selected agenda name
 - (void) updateItemName:(NSString *)newName sender:(id)sender {
-    NSLog(@"Updating selected agenda name");
     
-    // Update the agenda item array
-    NSMutableDictionary *agendaItem = [self.agenda objectAtIndex:self.detailEditRow.row];
-    [agendaItem setValue:newName forKey:AGENDA_NAME];
-
-
-    // Now store the new agenda array
-    [self.agenda writeToURL:self.agendaStorageURL atomically:YES];
-    // NOTE: WILL ALSO NEED TO STORE WHEN USER CHANGES AGENDA ORDER
-    
+    [self.myAgendaContext setName:newName forIndex:self.detailEditRow.row];
+     
     // Now reload the table with new value
     [self.agendaTableView reloadData];
 }
@@ -266,7 +370,7 @@ NSDate *lastDate; // will use this to calculate time interval from timer
 {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return [self.agenda count];
+    return [self.myAgendaContext agendaCount];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -274,34 +378,27 @@ NSDate *lastDate; // will use this to calculate time interval from timer
     static NSString *CellIdentifier = @"AgendaItem";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    /* The following code should not be necessary - had it in here temporarily because I had failed to include the proper cell identifier before.  Now that the cell identifier ("AgendaItem") is in place, the tableview is acting as it should and is allocating a cell without me having to do so...
-     
-    if (cell == nil) {
-        NSLog(@"Cell is nil");
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
-    }
-     */
-    
     // Configure the cell...
     // Get agenda dictionary for this row
-    NSDictionary *tempAgendaItem = [self.agenda objectAtIndex:indexPath.row];
+    NSMutableDictionary *tempAgendaItem = [self.myAgendaContext agendaInfoForIndex:indexPath.row];
     // Get minutes and seconds
-    NSTimeInterval seconds = [[tempAgendaItem valueForKey:AGENDA_TIME] doubleValue];
-    NSString *timeString = [self stringFromTimeInterval:seconds];
-    cell.textLabel.text = [tempAgendaItem valueForKey:AGENDA_NAME];
-    cell.detailTextLabel.text = timeString;
-    
+    cell.textLabel.text = tempAgendaItem.name;
+    cell.detailTextLabel.text = [self timeStringFromInterval:tempAgendaItem.time];
+     
     return cell;
 }
 
-- (NSString *)stringFromTimeInterval:(NSTimeInterval)interval {
+- (NSString *)timeStringFromInterval:(NSTimeInterval)interval {
     NSString *formattedTime;
     NSInteger ti = (NSInteger)interval;
     NSInteger seconds = ti % 60;
     NSInteger minutes = (ti / 60) % 60;
     NSInteger hours = (ti / 3600);
+    if (interval > 3599) {
+        formattedTime = [NSString stringWithFormat:@"%i:%02i:%02i", hours, minutes, seconds];
+    }
     if (interval >59) {
-        formattedTime = [NSString stringWithFormat:@"%i:%02i", hours, minutes];
+        formattedTime = [NSString stringWithFormat:@"%i:%02i", minutes, seconds];
     } else {
         formattedTime = [NSString stringWithFormat:@"0:%2i", seconds];
 
@@ -352,23 +449,16 @@ NSDate *lastDate; // will use this to calculate time interval from timer
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    // Start this agenda item
+    [self startItemAtIndex:indexPath.row];
+    
 }
 
 - (void) tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"About to perform segue");
+
     // First, store away the index path for the tapped row
     self.detailEditRow = indexPath;
-    NSDictionary *currentAgendaDictionary = [self.agenda objectAtIndex:indexPath.row];
-    NSNumber *timeNumber = [currentAgendaDictionary objectForKey:AGENDA_TIME];
-    NSTimeInterval timeInSeconds = [timeNumber doubleValue];
-    self.inFocusAgendaTimeInSeconds = timeInSeconds;
+
     [self performSegueWithIdentifier:@"AgendaItemDetail" sender:self];
 }
 
@@ -377,19 +467,14 @@ NSDate *lastDate; // will use this to calculate time interval from timer
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     NSLog(@"Preparing for segue");
-    // TEST CODE:
-    // self.currentAgendaTimeInSeconds = 480;
-    // Get name for detailEditRow
-    NSString *detailAgendaName = [[self.agenda objectAtIndex:self.detailEditRow.row] objectForKey:AGENDA_NAME];
-    self.inFocusAgendaName = detailAgendaName;
-    // END TEST CODE
+    
     
     AgendaItemVCViewController *agendaItemView = segue.destinationViewController;
     agendaItemView.myMtgMinderController = self;
     
     
-    agendaItemView.agendaItemName = self.inFocusAgendaName;
-    agendaItemView.itemTimeInSeconds = self.inFocusAgendaTimeInSeconds;
+    agendaItemView.agendaItemName = [self.myAgendaContext getNameForIndex:self.detailEditRow.row];
+    agendaItemView.itemTimeInSeconds = [self.myAgendaContext getTimeForIndex:self.detailEditRow.row];
     
     
     }

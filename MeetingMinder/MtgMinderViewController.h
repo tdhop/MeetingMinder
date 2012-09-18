@@ -15,13 +15,16 @@
 
 
 // Timer control methods
-- (IBAction)startTimer:(id)sender;
-// - (void) startAgendaItem:(id)sender; // Not sure yet if this is needed
 - (void) updateTimer: (id) sender; // Update the countdown timer display based on current time
 
 // Agenda control methods
 - (IBAction)startMeeting:(id)sender; // Set context to first agenda item then call startTimer
 - (IBAction)nextItem:(id)sender;  // Respond to Next button press by starting timer on next agenda item
+// Respond to Previous button press
+- (IBAction)previousItem:(id)sender;
+
+// Pause or play meeting - suspends timer in current context
+- (IBAction)pausePlayMeeting:(id)sender;
 
 // Add a new agenda item
 - (IBAction)addAgendaItem:(id)sender;

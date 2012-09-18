@@ -75,6 +75,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="previousItem:" destination="NQK-bq-rII" eventType="touchUpInside" id="3Eo-uk-DQY"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="YEl-vJ-pNo">
                                 <rect key="frame" x="202" y="96" width="98" height="37"/>
@@ -87,6 +90,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="nextItem:" destination="NQK-bq-rII" eventType="touchUpInside" id="w9G-so-iMH"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="v8D-FS-2uK">
                                 <rect key="frame" x="20" y="51" width="121" height="37"/>
@@ -100,7 +106,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="startTimer:" destination="NQK-bq-rII" eventType="touchUpInside" id="8rc-nT-sNx"/>
+                                    <action selector="startMeeting:" destination="NQK-bq-rII" eventType="touchUpInside" id="RW3-jm-Mtq"/>
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="tRR-oa-won">
@@ -121,7 +127,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <toolbarItems>
-                        <barButtonItem title="Clear" id="jqT-Vj-7kf"/>
+                        <barButtonItem title="Pause" id="jqT-Vj-7kf">
+                            <connections>
+                                <action selector="pausePlayMeeting:" destination="NQK-bq-rII" id="235-Vf-C1K"/>
+                            </connections>
+                        </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="0vc-db-m9F">
                         <barButtonItem key="leftBarButtonItem" systemItem="edit" id="rYY-f3-39w"/>
@@ -235,27 +245,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <point key="canvasLocation" x="549" y="249"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="AgendaItemVCViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AgendaItemVCViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="deleteItem:"/>
-                <relationship kind="action" name="userSetItemTimeInSeconds:"/>
-                <relationship kind="outlet" name="agendaTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="agendaTimePicker" candidateClass="UIDatePicker"/>
-            </relationships>
-        </class>
-        <class className="MtgMinderViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MtgMinderViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="addAgendaItem:"/>
-                <relationship kind="action" name="nextItem:"/>
-                <relationship kind="action" name="startTimer:"/>
-                <relationship kind="outlet" name="mainAgendaLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="timeLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

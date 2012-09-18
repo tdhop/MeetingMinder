@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		220888B91608A02300F95526 /* NSMutableDictionary+AgendaItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 220888B81608A02300F95526 /* NSMutableDictionary+AgendaItem.m */; };
 		2235D26B160624C5001F33EC /* AgendaContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 2235D26A160624C5001F33EC /* AgendaContext.m */; };
 		22D04C1115F399DC00071B3B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D04C1015F399DC00071B3B /* UIKit.framework */; };
 		22D04C1315F399DC00071B3B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D04C1215F399DC00071B3B /* Foundation.framework */; };
@@ -20,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		220888B71608A02300F95526 /* NSMutableDictionary+AgendaItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+AgendaItem.h"; sourceTree = "<group>"; };
+		220888B81608A02300F95526 /* NSMutableDictionary+AgendaItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+AgendaItem.m"; sourceTree = "<group>"; };
 		2235D269160624C5001F33EC /* AgendaContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgendaContext.h; sourceTree = "<group>"; };
 		2235D26A160624C5001F33EC /* AgendaContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgendaContext.m; sourceTree = "<group>"; };
 		22D04C0C15F399DC00071B3B /* MeetingMinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeetingMinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,6 +93,8 @@
 				22D04C2615F399DC00071B3B /* MtgMinderViewController.m */,
 				2235D269160624C5001F33EC /* AgendaContext.h */,
 				2235D26A160624C5001F33EC /* AgendaContext.m */,
+				220888B71608A02300F95526 /* NSMutableDictionary+AgendaItem.h */,
+				220888B81608A02300F95526 /* NSMutableDictionary+AgendaItem.m */,
 				22D1D6BF15F50F7200F5F781 /* AgendaItemVCViewController.h */,
 				22D1D6C015F50F7200F5F781 /* AgendaItemVCViewController.m */,
 				22D04C1715F399DC00071B3B /* Supporting Files */,
@@ -177,6 +182,7 @@
 				22D04C2715F399DC00071B3B /* MtgMinderViewController.m in Sources */,
 				22D1D6C115F50F7200F5F781 /* AgendaItemVCViewController.m in Sources */,
 				2235D26B160624C5001F33EC /* AgendaContext.m in Sources */,
+				220888B91608A02300F95526 /* NSMutableDictionary+AgendaItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
