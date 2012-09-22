@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		220888B91608A02300F95526 /* NSMutableDictionary+AgendaItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 220888B81608A02300F95526 /* NSMutableDictionary+AgendaItem.m */; };
 		2235D26B160624C5001F33EC /* AgendaContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 2235D26A160624C5001F33EC /* AgendaContext.m */; };
+		2271883D160CE0FB00D0F7F7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2271883C160CE0FB00D0F7F7 /* AVFoundation.framework */; };
+		22718840160CE4D800D0F7F7 /* Soothing.aif in Resources */ = {isa = PBXBuildFile; fileRef = 2271883F160CE4D800D0F7F7 /* Soothing.aif */; };
+		22718843160CEB9E00D0F7F7 /* InsistentAlertLong.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 22718841160CEB9E00D0F7F7 /* InsistentAlertLong.m4a */; };
+		22718844160CEB9E00D0F7F7 /* SweetAlert.wav in Resources */ = {isa = PBXBuildFile; fileRef = 22718842160CEB9E00D0F7F7 /* SweetAlert.wav */; };
+		22718846160CF7F800D0F7F7 /* Silence.wav in Resources */ = {isa = PBXBuildFile; fileRef = 22718845160CF7F700D0F7F7 /* Silence.wav */; };
 		22D04C1115F399DC00071B3B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D04C1015F399DC00071B3B /* UIKit.framework */; };
 		22D04C1315F399DC00071B3B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D04C1215F399DC00071B3B /* Foundation.framework */; };
 		22D04C1515F399DC00071B3B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D04C1415F399DC00071B3B /* CoreGraphics.framework */; };
@@ -25,6 +30,11 @@
 		220888B81608A02300F95526 /* NSMutableDictionary+AgendaItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+AgendaItem.m"; sourceTree = "<group>"; };
 		2235D269160624C5001F33EC /* AgendaContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgendaContext.h; sourceTree = "<group>"; };
 		2235D26A160624C5001F33EC /* AgendaContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgendaContext.m; sourceTree = "<group>"; };
+		2271883C160CE0FB00D0F7F7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		2271883F160CE4D800D0F7F7 /* Soothing.aif */ = {isa = PBXFileReference; lastKnownFileType = file; name = Soothing.aif; path = ../../../Resources/Sounds/Soothing.aif; sourceTree = "<group>"; };
+		22718841160CEB9E00D0F7F7 /* InsistentAlertLong.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = InsistentAlertLong.m4a; path = ../../../Resources/Sounds/InsistentAlertLong.m4a; sourceTree = "<group>"; };
+		22718842160CEB9E00D0F7F7 /* SweetAlert.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = SweetAlert.wav; path = ../../../Resources/Sounds/SweetAlert.wav; sourceTree = "<group>"; };
+		22718845160CF7F700D0F7F7 /* Silence.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = Silence.wav; path = ../../../Resources/Sounds/Silence.wav; sourceTree = "<group>"; };
 		22D04C0C15F399DC00071B3B /* MeetingMinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeetingMinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22D04C1015F399DC00071B3B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		22D04C1215F399DC00071B3B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -47,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2271883D160CE0FB00D0F7F7 /* AVFoundation.framework in Frameworks */,
 				22D04C1115F399DC00071B3B /* UIKit.framework in Frameworks */,
 				22D04C1315F399DC00071B3B /* Foundation.framework in Frameworks */,
 				22D04C1515F399DC00071B3B /* CoreGraphics.framework in Frameworks */,
@@ -76,6 +87,7 @@
 		22D04C0F15F399DC00071B3B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2271883C160CE0FB00D0F7F7 /* AVFoundation.framework */,
 				22D04C1015F399DC00071B3B /* UIKit.framework */,
 				22D04C1215F399DC00071B3B /* Foundation.framework */,
 				22D04C1415F399DC00071B3B /* CoreGraphics.framework */,
@@ -97,6 +109,10 @@
 				220888B81608A02300F95526 /* NSMutableDictionary+AgendaItem.m */,
 				22D1D6BF15F50F7200F5F781 /* AgendaItemVCViewController.h */,
 				22D1D6C015F50F7200F5F781 /* AgendaItemVCViewController.m */,
+				2271883F160CE4D800D0F7F7 /* Soothing.aif */,
+				22718841160CEB9E00D0F7F7 /* InsistentAlertLong.m4a */,
+				22718842160CEB9E00D0F7F7 /* SweetAlert.wav */,
+				22718845160CF7F700D0F7F7 /* Silence.wav */,
 				22D04C1715F399DC00071B3B /* Supporting Files */,
 			);
 			path = MeetingMinder;
@@ -167,6 +183,10 @@
 			files = (
 				22D04C1B15F399DC00071B3B /* InfoPlist.strings in Resources */,
 				22D04C2415F399DC00071B3B /* MainStoryboard.storyboard in Resources */,
+				22718840160CE4D800D0F7F7 /* Soothing.aif in Resources */,
+				22718843160CEB9E00D0F7F7 /* InsistentAlertLong.m4a in Resources */,
+				22718844160CEB9E00D0F7F7 /* SweetAlert.wav in Resources */,
+				22718846160CF7F800D0F7F7 /* Silence.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

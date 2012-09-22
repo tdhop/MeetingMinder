@@ -38,7 +38,7 @@
     [self.agenda writeToURL:self.storageURL atomically:YES];    
 }
 - (NSString *) inFocusName {
-    return [self.inFocusItem objectForKey:AGENDA_NAME];
+    return self.inFocusItem.name;
 }
 
 // Get/Set inFocusTime
@@ -49,7 +49,7 @@
     [self.agenda writeToURL:self.storageURL atomically:YES];
 }
 - (NSTimeInterval) inFocusTime {
-    return [[self.inFocusItem objectForKey:AGENDA_TIME] doubleValue];
+    return self.inFocusItem.time;
 }
 
 // Get/Set inFocusRemaining
@@ -60,7 +60,7 @@
     [self.agenda writeToURL:self.storageURL atomically:YES];
 }
 - (NSTimeInterval) inFocusRemaining {
-    return [[self.inFocusItem objectForKey:AGENDA_REMAINING] doubleValue];
+    return self.inFocusItem.remaining;
 }
 
 // Note that I don't synthesize inFocusIndex because it has to be readonly from the perspective of other objects but needs to be read-write internally
@@ -95,7 +95,7 @@
             self.agenda = [NSMutableArray arrayWithCapacity:5]; // Chose capacity of 5 somewhat randomly
         }
         
-        // Unit test AgendaItem category
+        // Initialize context to start of meeting
          
         success = YES;
     }
@@ -131,7 +131,7 @@
     [newAgendaItem setObject:@"New Item" forKey:AGENDA_NAME];
     [newAgendaItem setObject:[NSNumber numberWithDouble:0] forKey:AGENDA_REMAINING];
     [self.agenda addObject:newAgendaItem];
-    self.myFocusIndex = [self.agenda count] - 1;
+    // self.myFocusIndex = [self.agenda count] - 1; // Remove this line - there is no reason for it and was causing bug ID 2
     
     // Now store the new agenda array
     [self.agenda writeToURL:self.storageURL atomically:YES];

@@ -15,7 +15,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" tag="1" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="fbm-Oe-Nxn">
-                                <rect key="frame" x="0.0" y="164" width="320" height="208"/>
+                                <rect key="frame" x="0.0" y="149" width="320" height="223"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -51,7 +51,7 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" id="JWP-uS-4sE">
-                                <rect key="frame" x="0.0" y="141" width="320" height="23"/>
+                                <rect key="frame" x="0.0" y="127" width="320" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Agenda" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="eUR-KC-abu">
@@ -65,10 +65,10 @@
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="CQk-7K-ztM">
-                                <rect key="frame" x="20" y="96" width="88" height="37"/>
+                                <rect key="frame" x="17" y="73" width="55" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Previous">
+                                <state key="normal" title="Last">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -80,7 +80,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="YEl-vJ-pNo">
-                                <rect key="frame" x="202" y="96" width="98" height="37"/>
+                                <rect key="frame" x="250" y="73" width="50" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Next">
@@ -95,11 +95,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="v8D-FS-2uK">
-                                <rect key="frame" x="20" y="51" width="121" height="37"/>
+                                <rect key="frame" x="97" y="73" width="127" height="38"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Start Meeting">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.19607843137254902" green="0.30980392156862746" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted">
@@ -110,16 +110,16 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="tRR-oa-won">
-                                <rect key="frame" x="230" y="59" width="42" height="21"/>
+                                <rect key="frame" x="109" y="11" width="102" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Current Agenda Item" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="zkJ-z0-OT2">
-                                <rect key="frame" x="26" y="13" width="255" height="30"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Meeting Not Started" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="zkJ-z0-OT2">
+                                <rect key="frame" x="33" y="34" width="255" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -132,6 +132,13 @@
                                 <action selector="pausePlayMeeting:" destination="NQK-bq-rII" id="235-Vf-C1K"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem systemItem="stop" id="lhy-kC-zBm">
+                            <connections>
+                                <action selector="resetMeeting:" destination="NQK-bq-rII" id="WyV-P5-weB"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="xTC-8e-pFP"/>
+                        <barButtonItem systemItem="pageCurl" id="GCj-W0-aHp"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="0vc-db-m9F">
                         <barButtonItem key="leftBarButtonItem" systemItem="edit" id="rYY-f3-39w"/>
@@ -245,6 +252,30 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <point key="canvasLocation" x="549" y="249"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="AgendaItemVCViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AgendaItemVCViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="deleteItem:"/>
+                <relationship kind="action" name="userSetItemTimeInSeconds:"/>
+                <relationship kind="outlet" name="agendaTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="agendaTimePicker" candidateClass="UIDatePicker"/>
+            </relationships>
+        </class>
+        <class className="MtgMinderViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MtgMinderViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="addAgendaItem:"/>
+                <relationship kind="action" name="nextItem:"/>
+                <relationship kind="action" name="pausePlayMeeting:"/>
+                <relationship kind="action" name="previousItem:"/>
+                <relationship kind="action" name="resetMeeting:"/>
+                <relationship kind="action" name="startMeeting:"/>
+                <relationship kind="outlet" name="mainAgendaLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="timeLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

@@ -7,8 +7,12 @@
 //
 
 #import "MtgMinderAppDelegate.h"
+#import "MtgMinderViewController.h"
 
 @implementation MtgMinderAppDelegate
+
+@synthesize earlyNotification = _earlyNotification;
+@synthesize expiredNotification = _expiredNotification;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -20,6 +24,31 @@
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    
+    // Set up local notifications - I'm about to be suspended
+    
+    
+    // NSLog(@"Settup up notifications with dates %@, %@", self.earlyWarningDate, self.expireDate);
+    // Early Warning notification
+    if (self.earlyWarningDate) {
+        self.earlyNotification = [[UILocalNotification alloc] init];
+        self.earlyNotification.alertAction = WARNING_ALERT_NAME;
+        self.earlyNotification.alertBody = WARNING_ALERT_BODY;
+        self.earlyNotification.fireDate = self.earlyWarningDate;
+        self.earlyNotification.soundName = @"SweetAlert.wav";
+        [[UIApplication sharedApplication] scheduleLocalNotification:self.earlyNotification];
+    }
+
+    
+    // Expiration notification
+    if (self.expireDate) {
+        self.expiredNotification = [[UILocalNotification alloc] init];
+        self.expiredNotification.alertAction = EXPIRE_ALERT_NAME;
+        self.expiredNotification.alertBody = EXPIRE_ALERT_BODY;
+        self.expiredNotification.fireDate = self.expireDate;
+        self.expiredNotification.soundName = @"InsistentAlertLong.m4a";
+        [[UIApplication sharedApplication] scheduleLocalNotification:self.expiredNotification];
+    }
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -36,6 +65,9 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    // Cancel all UILocalNotifications
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
